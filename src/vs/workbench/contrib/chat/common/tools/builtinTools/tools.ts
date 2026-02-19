@@ -11,6 +11,7 @@ import { ConfirmationTool, ConfirmationToolData, ConfirmationToolWithOptionsData
 import { EditTool, EditToolData } from './editFileTool.js';
 import { createManageTodoListToolData, ManageTodoListTool } from './manageTodoListTool.js';
 import { RunSubagentTool } from './runSubagentTool.js';
+import { DebugControlTool, DebugControlToolData, DebugReadTool, DebugReadToolData } from './debugTools.js';
 
 export class BuiltinToolsContribution extends Disposable implements IWorkbenchContribution {
 
@@ -28,6 +29,16 @@ export class BuiltinToolsContribution extends Disposable implements IWorkbenchCo
 		const todoToolData = createManageTodoListToolData();
 		const manageTodoListTool = this._register(instantiationService.createInstance(ManageTodoListTool));
 		this._register(toolsService.registerTool(todoToolData, manageTodoListTool));
+
+		const debugReadTool = instantiationService.createInstance(DebugReadTool);
+		this._register(debugReadTool);
+		this._register(toolsService.registerTool(DebugReadToolData, debugReadTool));
+		this._register(toolsService.debugToolSet.addTool(DebugReadToolData));
+
+		const debugControlTool = instantiationService.createInstance(DebugControlTool);
+		this._register(debugControlTool);
+		this._register(toolsService.registerTool(DebugControlToolData, debugControlTool));
+		this._register(toolsService.debugToolSet.addTool(DebugControlToolData));
 
 		// Register the confirmation tool
 		const confirmationTool = instantiationService.createInstance(ConfirmationTool);

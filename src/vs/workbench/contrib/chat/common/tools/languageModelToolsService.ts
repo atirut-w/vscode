@@ -501,6 +501,7 @@ export interface ILanguageModelToolsService {
 	readonly vscodeToolSet: ToolSet;
 	readonly executeToolSet: ToolSet;
 	readonly readToolSet: ToolSet;
+	readonly debugToolSet: ToolSet;
 	readonly agentToolSet: ToolSet;
 	readonly onDidChangeTools: Event<void>;
 	readonly onDidPrepareToolCallBecomeUnresponsive: Event<{ readonly sessionResource: URI; readonly toolData: IToolData }>;
@@ -606,6 +607,7 @@ export namespace SpecedToolAliases {
 	export const search = 'search';
 	export const agent = 'agent';
 	export const read = 'read';
+	export const debug = 'debug';
 	export const web = 'web';
 	export const todo = 'todo';
 }
